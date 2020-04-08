@@ -3,23 +3,13 @@
 // when playerX clicks a square, boxIdArray[3]=x; when playerO clicks a square, boxIDArray[3]=O
 // when boxIDArray=x, check [winArrays] to see which [winArray].contains [boxID]; if [winArray] contains [boxID], winArray[4]=1;
 // when boxIDArray=o, check [winArrays] to see which [winArray].contains [boxID]; if [winArray] contains [boxID], winArray[4]=-1;
-// winArrays=[[[1,1], [1,2] [1,3], 0], [2,1], [2,2], [2,3], 0] [...]]
-// winArrays=[winRows[Row1 squares, r1 score], [Row2 squares, r2 score], [...]]
+// xxwinArrays=[[[1,1], [1,2] [1,3], 0], [2,1], [2,2], [2,3], 0] [...]]
+// xxwinArrays=[winRows[Row1 squares, r1 score], [Row2 squares, r2 score], [...]]
 // [1,1] onClick.if winRow contains [clicked element], add or subtract 1 from [i=4]
 // if winRow[4]=3 or winRow[4]=-3, winner!
 // if all boxID[4] truthy (aka, all boxes have been clicked) but no winRow[4]=|3|, game is a draw
 // if winner! or draw, end game, display result, display reset button
 
-
-//What happens when you click?
-//1. boxID[3]=playerID
-//2. UI grid displays playerID
-//3. program checks winArrays for boxID
-//3a. if boxID[3]=x add 1 from winArray[4]
-//3b. if boxID[3]=o subtract 1 from winArray[4]
-//4. 
-
-   
 
 makeGrid = function() {
   var row = 1
@@ -30,34 +20,64 @@ makeGrid = function() {
     col = 1;    
     for (col=1; col<4; col++) {
       box = [row, col];
-      grid.push(box); 
+      boxStr = box.toString()
+      grid.push(boxStr); 
     }
     return grid
   }
 }
 
-function Board() {
-
-
-function Box(row, col) {  // constructor
-  this.row = row;
-  this.col = col;
-}
-  
-// USE THIS IDEA LATER FOR CACLULATING WINS
-// squareVal = function(grid) {
-//   var boxVal=""
-//    for (i=0; i<grid.length; i++) {
-//     box.toString()=boxVal
-//      
-//   }
-// +}
+// function Grid() {
+//   this.boxes = [];
 // }
-var winArrays = [[[1,1],[1,2], [1,3]], [[2,1],[2,2],[2,3]], [[3,1],[3,2],[3,3]], [[1,1],[2,2],[3,3]], [[1,3], [2,2], [3, 1]], [[[1,1],[2,1], [3,1]], [[1,2],[2,2],[3,2]], [[1,3],[2,3],[3,3]]]];
+
+// function Box(row, col) {  // constructor
+//   this.row = row;
+//   this.col = col;
+// }
+
+// Grid.prototype.addBoxes = 
+// function (grid) { 
+// }
+//========================================================================================
+
+var winArraysCount = [0, 0, 0, 0, 0, 0, 0, 0]
+var winArrays = [["1,1","1,2", "1,3"], ["2,1", "2,2","2,3"], ["3,1","3,2","3,3"], ["1,1","2,2","3,3"], ["1,3", "2,2", "3, 1"], ["1,1","2,1", "3,1"], ["1,2","2,2","3,2"], ["1,3","2,3","3,3"]];
+
+// This function will execute when a button "id" is clicked!
+winChecker = function(grid) {
+  for (i=0; i<grid.length; i++) {
+    grid.forEach(boxStr) (function() {
+      if(boxStr === "id") {
+        for (i=0; i<winArrays.length; i++){
+          if (winArrays[i].includes(boxStr)) {
+            if (turn%2==1){
+              winArraysCount[i] ++;
+            }
+            else {
+              winArraysCount[i] -= 1;
+            }
+          }
+        }
+      }
+    })
+  }
+}
+
+// Where does this go? Julia doesn't know.
+// for (e[i]=0; i<winArraysCount.length; i++) {
+//   if (e != 0) {
+//     turn ++;
+//   } 
+// }
+// if (turn===9) {
+//   this.gameOver = true;
+
+
 function Game() {
   this.turn = 1;
   this.gameOver = false;
-}
+  }
 // Player 1
 // if(turn % 2 == 1) {
 //   placeMark(squareId, "X");
@@ -66,20 +86,13 @@ function Game() {
 //   placeMark(squareId, "O");
 // }
 
-
-function test(id) {
-  var idList = id.split(",");
-
-  alert(winArrays[0][1]);
-}
-
-
 $(document).ready(function() {
-
+  var buttonCount = 0;
     $("button").click(function() {
+      buttonCount ++;
       var squareId = $(this).attr("id");
       $(this).prop("disabled", true);
-      test(squareId);
+      //test(squareId);
       console.log(squareId);
     });
 });
