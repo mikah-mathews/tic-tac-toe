@@ -19,7 +19,33 @@
 //3b. if boxID[3]=o subtract 1 from winArray[4]
 //4. 
 
+// row, col = 1, 1
+// while row < 4:
+//     col = 1
+//     while col < 4:
+//         if row != col:
+//             print(row, col)
+//         col += 1
+//     row += 1     
 
+var row = 1
+var col = 1
+var box = []
+var grid = []
+for (row=1; row<4; row++) {
+  col = 1;    
+  for (col=1; col<4; col++) {
+    box = [row, col];
+    grid.push(box); 
+  }
+  console.log(grid)
+}
+
+
+function Board() {
+  boxIDs=[[1,1], [1,2], [1,3], [2,1], [2,2], [2,3], [3,1], [3,2], [3,3]];
+}
+var winArrays = [[[1,1],[1,2], [1,3]], [[2,1],[2,2],[2,3]], [[3,1],[3,2],[3,3]], [[1,1],[2,2],[3,3]], [[1,3], [2,2], [3, 1]], [[[1,1],[2,1], [3,1]], [[1,2],[2,2],[3,2]], [[1,3],[2,3],[3,3]]]];
 function Game() {
   this.turn = 1;
   this.gameOver = false;
