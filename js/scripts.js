@@ -10,22 +10,29 @@
 // if all boxID[4] truthy (aka, all boxes have been clicked) but no winRow[4]=|3|, game is a draw
 // if winner! or draw, end game, display result, display reset button
 
+function Board() {
+  this.grid = [];
+  this.turn = 0;
+  this.scores = [0, 0, 0, 0, 0, 0, 0, 0];
+  this.gameOver = false;
+};
 
-makeGrid = function() {
+function Grid () {
+  this.boxes = [];
   var row = 1
   var col = 1
   var box = []
   var grid = []
-  for (row=1; row<4; row++) {
-    col = 1;    
-    for (col=1; col<4; col++) {
-      box = [row, col];
-      boxStr = box.toString()
-      grid.push(boxStr); 
-    }
+    for (row=1; row<4; row++) {
+      col = 1;    
+      for (col=1; col<4; col++) {
+        box = [row, col];
+        boxStr = box.toString()
+        grid.push(boxStr); 
+      }
     return grid
   }
-}
+};
 
 // function Grid() {
 //   this.boxes = [];
@@ -41,7 +48,7 @@ makeGrid = function() {
 // }
 //========================================================================================
 
-var winArraysCount = [0, 0, 0, 0, 0, 0, 0, 0]
+var winArraysCount = [0, 0, 0, 0, 0, 0, 0, 0];
 var winArrays = [["1,1","1,2", "1,3"], ["2,1", "2,2","2,3"], ["3,1","3,2","3,3"], ["1,1","2,2","3,3"], ["1,3", "2,2", "3, 1"], ["1,1","2,1", "3,1"], ["1,2","2,2","3,2"], ["1,3","2,3","3,3"]];
 
 // This function will execute when a button "id" is clicked!
@@ -90,10 +97,17 @@ $(document).ready(function() {
   var buttonCount = 0;
     $("button").click(function() {
       buttonCount ++;
+      if(buttonCount%2==1) {
+        $(this).text("X");
+      } else {
+        $(this).text("O");
+      }
       var squareId = $(this).attr("id");
       $(this).prop("disabled", true);
       //test(squareId);
       console.log(squareId);
+      console.log(Grid(squareId));
+      console.log(winChecker(squareId));
     });
 });
 
