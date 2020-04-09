@@ -93,17 +93,22 @@ resetBoard = function() {
   for(var i = 0; i < winArraysCount.length; i++) {
     winArraysCount[i] = 0;
   }
+
+  $(".toes").each(function() {
+    $(this).html("");
+    $(this).prop("disabled", false);
+  })
 }
 
 checkWin = function() {
   if(winArraysCount.includes(3)) {
-
+    return "Player 1 Wins!";
   }
   else if(winArraysCount.includes(-3)) {
-
+    return "Player 2 Wins!";
   }
   else {
-
+    return "";
   }
 }
 
@@ -118,12 +123,15 @@ checkWin = function() {
 
 $(document).ready(function() {
   var buttonCount = 0;
-    $("button").click(function() {
+  $('#reset').click(function() {
+    location.reload();
+  });
+    $(".toes:button").click(function() {
       var checkedBox = $(this).attr("id");
       $(this).prop("disabled", true);
       
       buttonCount ++;
-      console.log(scoreCounter(checkedBox, buttonCount));
+      //console.log(scoreCounter(checkedBox, buttonCount));
       if(buttonCount%2==1) {
         $(this).text("X");
       } else {
@@ -131,12 +139,20 @@ $(document).ready(function() {
       }
 
       scoreCounter(checkedBox, buttonCount);
+      var winner = checkWin();
+
+      if(winner){
+        alert(winner);
+        resetBoard();
+        buttonCount = 0;
+      }
 
       //test(squareId);
       console.log(checkedBox);
       
       
     });
+    
 });
 
 
