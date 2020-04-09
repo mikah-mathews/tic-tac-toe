@@ -70,3 +70,4 @@ when game button is clicked,
 html updates to X or O depending on turn
 set squareID variable (which tracks button click) to "id"
 game play function called on squareID & X/O
+

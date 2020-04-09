@@ -10,29 +10,30 @@
 // if all boxID[4] truthy (aka, all boxes have been clicked) but no winRow[4]=|3|, game is a draw
 // if winner! or draw, end game, display result, display reset button
 
-function Board() {
-  this.grid = [];
-  this.turn = 0;
-  this.scores = [0, 0, 0, 0, 0, 0, 0, 0];
-  this.gameOver = false;
-};
+// function Board() {
+//   // this.grid = [];
+//   // this.boxes = [];
+//   this.turn = 0;
+//   this.scores = [0, 0, 0, 0, 0, 0, 0, 0];
+//   this.gameOver = false;
+// };
 
-function Grid () {
-  this.boxes = [];
-  var row = 1
-  var col = 1
-  var box = []
-  var grid = []
-    for (row=1; row<4; row++) {
-      col = 1;    
-      for (col=1; col<4; col++) {
-        box = [row, col];
-        boxStr = box.toString()
-        grid.push(boxStr); 
-      }
-    return grid
-  }
-};
+// function Grid () {
+//   // this.boxes = [];
+//   var row = 1
+//   var col = 1
+//   var box = []
+  // var grid = []
+  //   for (row=1; row<4; row++) {
+  //     col = 1;    
+  //     for (col=1; col<4; col++) {
+  //       box = [row, col];
+  //       var boxStr = box.toString()
+  //       grid.push(boxStr); 
+  //     }
+  //   return grid
+//   }
+// };
 
 // function Grid() {
 //   this.boxes = [];
@@ -48,43 +49,45 @@ function Grid () {
 // }
 //========================================================================================
 
-var winArraysCount = [0, 0, 0, 0, 0, 0, 0, 0];
-var winArrays = [["1,1","1,2", "1,3"], ["2,1", "2,2","2,3"], ["3,1","3,2","3,3"], ["1,1","2,2","3,3"], ["1,3", "2,2", "3, 1"], ["1,1","2,1", "3,1"], ["1,2","2,2","3,2"], ["1,3","2,3","3,3"]];
 
 // This function will execute when a button "id" is clicked!
-winChecker = function(grid) {
-  for (i=0; i<grid.length; i++) {
-    grid.forEach(boxStr) (function() {
-      if(boxStr === "id") {
-        for (i=0; i<winArrays.length; i++){
-          if (winArrays[i].includes(boxStr)) {
-            if (turn%2==1){
-              winArraysCount[i] ++;
-            }
-            else {
-              winArraysCount[i] -= 1;
-            }
-          }
-        }
+// scoreCounter = function(checkedBox) {
+//   // for (i=0; i<grid.length; i++) {
+//     var checkedBox = ; //jquery id of box passed in from html
+    // grid.forEach(boxStr) (function() {
+    //   if(boxStr === checkedBox) { //compare fixed positions on grid to checkedBox
+    //     for (i=0; i<winArrays.length; i++){
+          
+//       }
+//     })
+//   }
+// }
+
+// function Game() {
+//   this.turn = 1;
+//   this.score = 0;
+//   this.gameOver = false;
+//   }
+
+// Game.prototype.turn(); 
+
+var winArraysCount = [0, 0, 0, 0, 0, 0, 0, 0];
+var winArrays = [["1,1","1,2","1,3"], ["2,1","2,2","2,3"], ["3,1","3,2","3,3"], ["1,1","2,2","3,3"], ["1,3","2,2","3,1"], ["1,1","2,1","3,1"], ["1,2","2,2","3,2"], ["1,3","2,3","3,3"]];
+
+scoreCounter = function(checkedBox, buttonCount) {
+  for (i=0; i<winArrays.length; i++) {
+    if (winArrays[i].includes(checkedBox)) {
+      if (buttonCount%2==1){
+        winArraysCount[i] ++;
       }
-    })
+      else {  
+        winArraysCount[i] -= 1;
+      }
+    }
   }
 }
 
-// Where does this go? Julia doesn't know.
-// for (e[i]=0; i<winArraysCount.length; i++) {
-//   if (e != 0) {
-//     turn ++;
-//   } 
-// }
-// if (turn===9) {
-//   this.gameOver = true;
 
-
-function Game() {
-  this.turn = 1;
-  this.gameOver = false;
-  }
 // Player 1
 // if(turn % 2 == 1) {
 //   placeMark(squareId, "X");
@@ -96,18 +99,19 @@ function Game() {
 $(document).ready(function() {
   var buttonCount = 0;
     $("button").click(function() {
+      var checkedBox = $(this).attr("id");
+      $(this).prop("disabled", true);
+      console.log(scoreCounter(checkedBox));
       buttonCount ++;
       if(buttonCount%2==1) {
         $(this).text("X");
       } else {
         $(this).text("O");
       }
-      var squareId = $(this).attr("id");
-      $(this).prop("disabled", true);
       //test(squareId);
-      console.log(squareId);
-      console.log(Grid(squareId));
-      console.log(winChecker(squareId));
+      console.log(checkedBox);
+      // console.log(Grid(squareId));
+      console.log(scoreCounter(checkedBox));
     });
 });
 
