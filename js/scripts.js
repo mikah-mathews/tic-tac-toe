@@ -79,11 +79,31 @@ scoreCounter = function(checkedBox, buttonCount) {
     if (winArrays[i].includes(checkedBox)) {
       if (buttonCount%2==1){
         winArraysCount[i] ++;
+        console.log(winArraysCount);
       }
       else {  
         winArraysCount[i] -= 1;
+        console.log(winArraysCount);
       }
     }
+  }
+}
+
+resetBoard = function() {
+  for(var i = 0; i < winArraysCount.length; i++) {
+    winArraysCount[i] = 0;
+  }
+}
+
+checkWin = function() {
+  if(winArraysCount.includes(3)) {
+
+  }
+  else if(winArraysCount.includes(-3)) {
+
+  }
+  else {
+
   }
 }
 
@@ -101,17 +121,21 @@ $(document).ready(function() {
     $("button").click(function() {
       var checkedBox = $(this).attr("id");
       $(this).prop("disabled", true);
-      console.log(scoreCounter(checkedBox));
+      
       buttonCount ++;
+      console.log(scoreCounter(checkedBox, buttonCount));
       if(buttonCount%2==1) {
         $(this).text("X");
       } else {
         $(this).text("O");
       }
+
+      scoreCounter(checkedBox, buttonCount);
+
       //test(squareId);
       console.log(checkedBox);
-      // console.log(Grid(squareId));
-      console.log(scoreCounter(checkedBox));
+      
+      
     });
 });
 
