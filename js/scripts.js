@@ -47,16 +47,13 @@ $(document).ready(function() {
   
     $(".toes:button").click(function() {
       var checkedBox = $(this).attr("id");
-      $(this).prop("disabled", true);
-      
+      $(this).prop("disabled", true);   
       buttonCount ++;
-      //console.log(scoreCounter(checkedBox, buttonCount));
       if(buttonCount%2==1) {
         $(this).text("X");
       } else {
         $(this).text("O");
       }
-
       scoreCounter(checkedBox, buttonCount);
       var winner = checkWin(buttonCount);
 
@@ -64,12 +61,7 @@ $(document).ready(function() {
         alert(winner);
         resetBoard();
         buttonCount = 0;
-      }
-
-      //test(squareId);
-      console.log(checkedBox);
-      
-      
+      }      
     });
     
 });
