@@ -2,7 +2,7 @@
 
 #### _A 2-Player TicTacToe Game created in Javascript_
 
-#### By _**Julia Seidman & Matt Stroud**_
+#### By _**Julia Seidman, Mikah Mathews, & Matt Stroud**_
 
 ## Description
 
@@ -42,32 +42,4 @@ _Contact Julia Seidman, Matt Stroud or Mikah Mathews at juliaseid@gmail.com, lix
 Copyright (c) 2020 **_Julia Seidman, Matt Stroud & Mikah Mathews_** under MIT copyright
 
 
-Board constructor - properties include squares array, turn counter, win scores array, gameOver property
-
-function creates grid
-
-board prototype checks win by looking for score of 3, executes endGame prototype on the winner
-
-endGame prototype creates an alert to name the winner
-
-board prototype updateScore updates score array based on what button id is clicked
-
-GameSquare constructor includes marked value and ID for each square
-
-GameSquare prototypes update marked value to X, O, or blank
-
-(logic for computer adversary)
-
-game play function loops through grid array to find the button id that was clicked, then updates score accordingly
-
-if someone wins, break
-
-----
-
-document ready function
-
-when game button is clicked, 
-html updates to X or O depending on turn
-set squareID variable (which tracks button click) to "id"
-game play function called on squareID & X/O
 
